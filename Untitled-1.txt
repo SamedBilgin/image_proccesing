@@ -1,0 +1,32 @@
+def bol_ve_yeniden_birlestir(a, b):
+  """
+  Divide and Conquer ile iki sayının çarpımını hesaplar.
+
+  Args:
+    a: İlk sayı.
+    b: İkinci sayı.
+
+  Returns:
+    a ve b'nin çarpımı.
+  """
+
+  if len(str(a)) == 1 and len(str(b)) == 1:
+    return a * b
+
+  # Sayıları ikişer basamaklı sayılara ayırın
+  a1, a2 = a // 100, a % 100
+  b1, b2 = b // 100, b % 100
+
+  # Alt problemleri çözün
+  z0 = bol_ve_yeniden_birlestir(a1, b2)
+  z1 = bol_ve_yeniden_birlestir(a2, b1)
+  z2 = bol_ve_yeniden_birlestir(a1, b1)
+  z3 = bol_ve_yeniden_birlestir(a2, b2)
+
+  # Sonuçları birleştirin
+  return (z0 * 10000 + z1 * 1000 + z2 * 10 + z3)
+
+# Örnek Kullanım
+carpim = bol_ve_yeniden_birlestir(4544, 3198)
+print("4544 x 3198 =", carpim)
+
